@@ -3,6 +3,8 @@ import { useLocation, Switch } from 'react-router-dom';
 import AppRoute from './utils/AppRoute';
 import ScrollReveal from './utils/ScrollReveal';
 import ReactGA from 'react-ga';
+import products from "./assets/products.json"
+import Product from "./components/Productss/Product"
 
 // Layouts
 import LayoutDefault from './layouts/LayoutDefault';
@@ -32,13 +34,29 @@ const App = () => {
   }, [location]);
 
   return (
-    <ScrollReveal
+    <>
+        <ScrollReveal
       ref={childRef}
       children={() => (
         <Switch>
           <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
         </Switch>
       )} />
+      <div className={"container"}>
+        <main className={"main"}>
+        <h1>
+          Ecommerce App
+        </h1>
+        <div className={"grid"}>
+          {
+            products.map((product, i) => <Product {...product} key={i}/> )
+          }
+        </div>
+        </main>
+        <div></div> 
+
+      </div>
+    </>
   );
 }
 
